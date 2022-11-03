@@ -1,2 +1,2 @@
-# waves
-wave speed experiment
+# Experiments
+лабы с инженерки
