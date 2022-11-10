@@ -9,13 +9,11 @@ dac = [26, 19, 13, 6, 5, 11, 9, 10]
 gpio.setmode(gpio.BCM)
 gpio.setup(dac, gpio.OUT)
 gpio.setup(4, gpio.IN)
-#gpio.setup(17, gpio.OUT)
 
-def decbin(n):
+def decbin(n): #превратить число в список двоичной записи числа
     return [int(bit) for bit in bin(n)[2:].zfill(8)]
 
-def adc():
-#    gpio.output(17, 1)
+def adc(): #считать значения с АЦП
     vlt = 0
     for i in range(8):
         gpio.output(dac, decbin(vlt + 2**(7-i)))
@@ -24,7 +22,7 @@ def adc():
             vlt += 2**(7-i)
     return vlt
 
-def save(samples, start, finish, height, calibrate):
+def save(samples, start, finish, height, calibrate): #сохранить измерения в фаул
     if(calibrate == '1'):
         filename = 'wave-data-{}mm.txt'.format(height)
     else:
@@ -44,8 +42,7 @@ try:
     height = input("введите уровень воды ")
     calibrate = input("1 если калибровка ")
     start = time.time()
-    if calibrate: timelimit = 10
-    else: timelimit = 15
+    timelimit = 10
     while(time.time() - start < timelimit):
         vlt = adc()
         arr.append(vlt)
