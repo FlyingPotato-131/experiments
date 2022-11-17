@@ -78,8 +78,13 @@ def stepBackward(n):
 #   Save and read data
 ########################################
 
-def save(measures, motorSteps):
-    filename = 'jet-data {}.txt'.format(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+def save(measures, motorSteps, type, dist = 0):
+    if(type == "pressure"):
+        filename = 'jet-data-cal-pressure{}.txt'.format(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    elif(type == "motor"):
+        filename = 'jet-data-cal-motor{}.txt'.format(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+    else:
+        filename = 'jet-data-{}-{}.txt'.format(dist, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
 
     with open(filename, "w") as outfile:
         outfile.write('- Jet Lab\n')
