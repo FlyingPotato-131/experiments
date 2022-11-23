@@ -47,21 +47,24 @@ for i in range(len(datafiles)):
     vel = []; x = []
     measures, steps, length = read(datafiles[i])
     replace = np.argmax(measures)
-    Q = 0
+
     for j in range(length):
         velocity = get_velocity(measures[j])
         dist = steps / length * 0.055
         vel.append(velocity)
         x.append((j - replace) * dist)
-        Q += velocity*dist/1000
-    Q = Q*3.14*10*1.2/2
-    consumption.append(Q)
+
     z = np.polyfit(x, vel, 8)
     p = np.poly1d(z)
     replace = np.argmax(p(x))
     x = []
     for j in range(length):
         x.append((j - replace) * steps / length * 0.055)
+
+    Q = 0
+    for j in range(length - 1):
+        Q += 3.14 * (abs(x[j]) * vel[j] + abs(x[j + 1]) * vel[j + 1]) * dist / 1000
+    consumption.append(Q)
     ax.plot(x, vel, label= "Q (" + str(10*i) + " мм) = " + str(round(Q, 2)) + " [г/с]")
 
 with open("consumption.txt", 'w') as f:
