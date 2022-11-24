@@ -15,9 +15,9 @@ def read(filename): #считать данные из файла
 
 
 def get_velocity(value):
-    pres = 0.16 * value - 157.9
+    pres = 0.219 * value - 214.16
     if (pres) < 0: pres = 0
-    vel = (2*pres)**0.5 - 3
+    vel = (2*pres)**0.5 - 4
     if vel < 0: vel = 0
     return vel
 
