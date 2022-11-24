@@ -17,7 +17,7 @@ def read(filename): #считать данные из файла
 def get_velocity(value):
     pres = 0.16 * value - 157.9
     if (pres) < 0: pres = 0
-    vel = (2*pres)**0.5 - 5
+    vel = (2*pres)**0.5
     if vel < 0: vel = 0
     return vel
 
@@ -34,6 +34,9 @@ consumption = []
 for i in range(len(files)):  # списки названий необходимых файлов
     if (not clbr.search(files[i]) and jet.search(files[i]) and nums.search(files[i])):
         datafiles.append(files[i])
+
+datafiles = sorted(datafiles)
+print(datafiles)
 
 fig, ax = plt.subplots(figsize=(16, 10), dpi=100)
 ax.set_title("Скорость потока воздуха в сечении затопленной струи", fontsize = 20)
