@@ -41,6 +41,7 @@ p = np.poly1d(z)
 ax.plot(x1, p(x1), label = "Аналитическая зависимость", color = "orange")
 k = p.coef[0]
 b = p.coef[1]
+print(k, b)
 
 
 ax.set_title("Зависимость скорости звука от концентрации углекислого газа", fontsize = 20)
@@ -55,6 +56,6 @@ ax.scatter(C1, sound_speed, label = "Значения в воздухе: " + str
 ax.scatter(C2, sound_speed_l, label = "Значения в выдохе: " + str(f'{(sound_speed_l):3.1f}') + " [м/с], " + str(f'{(C2):3.1f}') + " [%]")
 
 ax.legend(fontsize=15)
-fig.savefig("distance-calibration.png")
+fig.savefig("sound_velocity.png")
 
 plt.show()
